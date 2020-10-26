@@ -25,12 +25,12 @@ export class MoviesController {
     @Post()
     create(@Body() movieData) {
         console.log(movieData);
-        return 'This will create a movie';
+        return this.moviesService.create(movieData);
     }
 
     @Delete('/:movieId')
     delete(@Param('movieId') id: string) {
-        return `This removes a movie with the Id ${id}`;
+        return this.moviesService.deleteOne(id);
     }
 
     @Patch('/:movieId') //updates specific resource (<-> Put: updates whole resources)
