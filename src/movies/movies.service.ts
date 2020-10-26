@@ -16,7 +16,7 @@ export class MoviesService {
     create(movieData) {
         return this.movies.push({
             id: this.movies.length + 1,
-            ...movieData
+            ...movieData,
         })
     }
 
