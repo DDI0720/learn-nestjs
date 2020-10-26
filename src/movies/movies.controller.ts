@@ -1,10 +1,15 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Movie } from './entities/movies.entity';
+import { MoviesService } from './movies.service';
 
 @Controller('movies')
 export class MoviesController {
+
+    constructor(readonly moviesService: MoviesService) {}
+
     @Get()
-    getAll() {
-        return 'This return all of the movie lists that we have';
+    getAll(): Movie[] {
+        return this.moviesService.getAll();
     }
 
     @Get('search')
@@ -13,8 +18,8 @@ export class MoviesController {
     }
 
     @Get('/:movieId')
-    getOne(@Param('movieId') id: string) {
-        return `You want to search '${id}' ?`;
+    getOne(@Param('movieId') id: string): Movie {
+        return this.moviesService.getOne(id);
     }
 
     @Post()
