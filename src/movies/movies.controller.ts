@@ -34,7 +34,9 @@ export class MoviesController {
 
     @Delete('/:movieId')
     delete(@Param('movieId') id: string) {
-        return this.moviesService.deleteOne(id);
+        this.getOne(id);
+        this.moviesService.deleteOne(id);
+        return true;
     }
 
     @Patch('/:movieId') //updates specific resource (<-> Put: updates whole resources)
