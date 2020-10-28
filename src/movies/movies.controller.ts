@@ -40,7 +40,7 @@ export class MoviesController {
     }
 
     @Patch('/:movieId') //updates specific resource (<-> Put: updates whole resources)
-    patch(@Param('movieId') id: string) {
-        return `This patches a movie with the Id ${id}`;
+    patch(@Param('movieId') id: string, updateData) {
+        return this.moviesService.update(id, updateData);
     }
 }
