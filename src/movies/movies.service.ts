@@ -10,8 +10,8 @@ export class MoviesService {
         return this.movies;
     }
 
-    getOne(id: string): Movie {
-        return this.movies.find(movie => movie.id === parseInt(id));
+    getOne(id: number): Movie {
+        return this.movies.find(movie => movie.id === id);
     }
 
     create(movieData: CreateMovieDTO) {
@@ -21,12 +21,12 @@ export class MoviesService {
         })
     }
 
-    deleteOne(id: string): boolean {
+    deleteOne(id: number): boolean {
         this.movies = this.movies.filter(movie => movie.id !== +id); //삭제한것 제외한 나머지를 할당함
         return true;
     }
 
-    update(id: string, updateData) {
+    update(id: number, updateData) {
         const movie = this.getOne(id);
         this.deleteOne(id);
         return this.movies.push({...movie, ...updateData});

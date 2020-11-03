@@ -19,7 +19,7 @@ export class MoviesController {
     }
 
     @Get('/:movieId')
-    getOne(@Param('movieId') id: string): Movie {
+    getOne(@Param('movieId') id: number): Movie {
         const movie = this.moviesService.getOne(id);
         if (!movie) {
             throw new NotFoundException(`Movie with ID ${id} is not found`);
@@ -34,14 +34,14 @@ export class MoviesController {
     }
 
     @Delete('/:movieId')
-    delete(@Param('movieId') id: string) {
+    delete(@Param('movieId') id: number) {
         this.getOne(id);
         this.moviesService.deleteOne(id);
         return true;
     }
 
     @Patch('/:movieId') //updates specific resource (<-> Put: updates whole resources)
-    patch(@Param('movieId') id: string, updateData) {
+    patch(@Param('movieId') id: number, updateData) {
         return this.moviesService.update(id, updateData);
     }
 }
