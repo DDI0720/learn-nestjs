@@ -42,7 +42,7 @@ export class MoviesController {
     }
 
     @Patch('/:movieId') //updates specific resource (<-> Put: updates whole resources)
-    patch(@Param('movieId') id: number, updateData: UpdateMovieDTO) {
+    patch(@Param('movieId') id: number, @Body() updateData: UpdateMovieDTO) {
         return this.moviesService.update(id, updateData);
     }
 }
