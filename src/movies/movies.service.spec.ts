@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { arrayContains, ArrayNotEmpty, arrayNotEmpty } from 'class-validator';
 import { MoviesService } from './movies.service';
@@ -35,6 +36,31 @@ describe('MoviesService', () => {
       const movie = service.getOne(1);
       expect(movie).toBeDefined();
       expect(movie.id).toEqual(1);
+    });
+
+    it("should return 404 error", () => {
+      try {
+        service.getOne(999);
+      } catch (e) {
+        expect(e).toBeInstanceOf(NotFoundException);
+      }
     })
-  })
+  });
+
+
+  describe("delete", () => {
+    it("should delete a movie", () => {
+      service.create({
+        title: 'delete test',
+        genres: ['nono'],
+        year: 2020
+      });
+
+      const beforeDelete = service.getAll().length;
+      service.deleteOne(1);
+      const afterDelete = service.getAll().length;
+
+      expect(afterDelete).toBeLessThan(beforeDelete);
+    })
+  });
 });
